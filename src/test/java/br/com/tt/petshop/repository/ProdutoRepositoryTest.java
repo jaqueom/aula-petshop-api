@@ -74,4 +74,21 @@ public class ProdutoRepositoryTest {
         assertTrue(produto.isAtivo());
     }
 
+    @Test
+    void deveBuscarProdutosAtivosPorPreco(){
+        List<Produto> produtos = produtoRepository.listarProdutosAtivosPorPreco();
+        assertEquals(3,produtos.size());
+        Produto produto = produtos.get(0);
+        assertEquals("Brinquedo de morder", produto.getNome());
+        assertEquals(BigDecimal.valueOf(10d), produto.getValor());
+        assertTrue(produto.isAtivo());
+    }
+
+    @Test
+    void deveContarProdutosInativos(){
+        long qntProdutosInativos = produtoRepository.contarProdutosInativos();
+        assertEquals(1,qntProdutosInativos);
+
+    }
+
 }
