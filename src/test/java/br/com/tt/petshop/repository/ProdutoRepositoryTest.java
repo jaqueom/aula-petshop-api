@@ -4,6 +4,7 @@ import br.com.tt.petshop.model.Produto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -63,5 +64,14 @@ public class ProdutoRepositoryTest {
         assertFalse(produto.isAtivo());
     }
 
+    @Test
+    void deveBuscarAtivosPorNome(){
+        List<Produto> produtos = produtoRepository.listarProdutosAtivosPorNome("Ração");
+        assertEquals(2,produtos.size());
+        Produto produto = produtos.get(0);
+        assertEquals("Ração para cachorros", produto.getNome());
+        assertEquals(BigDecimal.valueOf(142.62d), produto.getValor());
+        assertTrue(produto.isAtivo());
+    }
 
 }
