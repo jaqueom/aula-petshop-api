@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 public class ClienteRepositoryTest {
@@ -36,5 +37,20 @@ public class ClienteRepositoryTest {
         Assertions.assertEquals("Fulano", cliente.getNome());
         Assertions.assertEquals("51993333333", cliente.getTelefone());
         Assertions.assertEquals("29090223070", cliente.getCpf());
+    }
+
+    @Test
+    void deveRetornarPorCpfcomJpql(){
+        Cliente fulano = new Cliente(2L,"Fulano", LocalDate.now(), "51993333333", "29090223070");
+        clienteRepository.save(fulano);
+        Cliente ciclano = new Cliente(2L,"Ciclano", LocalDate.now(), "51993334444", "07187388020");
+        clienteRepository.save(ciclano);
+
+        Cliente fulanoCliente = clienteRepository.buscaPorCpfComTelefoneNaoNulo("29090223070");
+              //  .orElseThrow(()-> new RuntimeException("Não retornou o Fulano pelo CPF"));
+        Assertions.assertEquals("Fulano", fulanoCliente.getNome());
+        Assertions.assertEquals("51993333333", fulanoCliente.getTelefone());
+        Assertions.assertEquals("29090223070", fulanoCliente.getCpf());
+
     }
 }
