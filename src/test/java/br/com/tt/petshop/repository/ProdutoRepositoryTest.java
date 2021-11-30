@@ -1,6 +1,7 @@
 package br.com.tt.petshop.repository;
 
 import br.com.tt.petshop.model.Produto;
+import mock.ProdutoMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,10 +23,10 @@ public class ProdutoRepositoryTest {
 
     @BeforeEach // roda antes de cada teste
     void insereProdutosParaTestes() {
-        produtoRepository.save(new Produto(1l, "Ração para cachorros", BigDecimal.valueOf(142.62d), true));
-        produtoRepository.save(new Produto(2l, "Ração para gatos", BigDecimal.valueOf(292.99d), true));
-        produtoRepository.save(new Produto(3l, "Ração para porcos", BigDecimal.valueOf(199.50d), false));
-        produtoRepository.save(new Produto(4l, "Brinquedo de morder", BigDecimal.valueOf(10d), true));
+        produtoRepository.save(ProdutoMock.racaoCachorro());
+        produtoRepository.save(ProdutoMock.racaoGatos());
+        produtoRepository.save(ProdutoMock.racaoPorcos());
+        produtoRepository.save(ProdutoMock.brinquedo());
     }
 
     @Test
