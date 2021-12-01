@@ -23,10 +23,10 @@ public class ProdutoRepositoryTest {
 
     @BeforeEach // roda antes de cada teste
     void insereProdutosParaTestes() {
-        produtoRepository.save(ProdutoMock.racaoCachorro());
-        produtoRepository.save(ProdutoMock.racaoGatos());
-        produtoRepository.save(ProdutoMock.racaoPorcos());
-        produtoRepository.save(ProdutoMock.brinquedo());
+        produtoRepository.save(new Produto(1l, "Ração para cachorros",BigDecimal.valueOf(142.62d), true));
+        produtoRepository.save(new Produto(2l, "Ração para gatos",BigDecimal.valueOf(292.99d), true));
+        produtoRepository.save(new Produto(3l, "Ração para porcos",BigDecimal.valueOf(199.50d), false));
+        produtoRepository.save(new Produto(4l, "Brinquedo de morder",BigDecimal.valueOf(10d), true));
     }
 
     @Test
@@ -89,7 +89,5 @@ public class ProdutoRepositoryTest {
     void deveContarProdutosInativos(){
         long qntProdutosInativos = produtoRepository.contarProdutosInativos();
         assertEquals(1,qntProdutosInativos);
-
     }
-
 }

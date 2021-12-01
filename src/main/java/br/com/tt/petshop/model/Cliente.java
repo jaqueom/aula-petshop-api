@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
-@Entity // só funciona para bancos relacionais, até agora...
+@Entity // só funciona para bancos relacionais, até agora... // ENTIDADE
 @Table(name="tb_cliente") // se não coloca nome aqui, assume o nome da classe, mesma coisa nos nomes dos campos
 public class Cliente {
     @Id

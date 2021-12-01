@@ -2,7 +2,7 @@ package br.com.tt.petshop.service;
 
 import br.com.tt.petshop.dto.ProdutoDetalhes;
 import br.com.tt.petshop.dto.ProdutoListagem;
-import br.com.tt.petshop.factory.ClienteFactory;
+import br.com.tt.petshop.exception.ItemNaoEncontradoException;
 import br.com.tt.petshop.factory.ProdutoFactory;
 import br.com.tt.petshop.repository.ProdutoRepository;
 
@@ -24,6 +24,6 @@ public class ProdutoService {
     public ProdutoDetalhes buscaPorId(Long id){
         return produtoRepository.findById(id)
                 .map(ProdutoFactory::criarProdutoDetalhes)
-                .orElseThrow(()-> new RuntimeException("O produto informado não existe!"));
+                .orElseThrow(()-> new ItemNaoEncontradoException("O produto informado não existe!"));
     }
 }

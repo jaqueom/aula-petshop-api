@@ -68,7 +68,8 @@ public class ProdutoServiceTest {
                 .when(produtoRepository.findById(999L))
                 .thenReturn(Optional.empty());
 
-        Assertions.assertThrows(RuntimeException.class,
-                () -> produtoService.buscaPorId(999L));
+        RuntimeException e = Assertions.assertThrows(RuntimeException.class,
+                             () -> produtoService.buscaPorId(999L));
+        Assertions.assertEquals("O produto informado não existe!",e.getMessage());
     }
 }

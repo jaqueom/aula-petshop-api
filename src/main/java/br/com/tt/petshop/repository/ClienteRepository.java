@@ -14,11 +14,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     //findDistinctByCpfOrTelefoneOrderById -- exemplo
 
     //JPQL - valida em tempo de startup igual ao query method
-    // @Query("select c.* from Cliente c where c.cpf = :cpf and c.telefone is not null")
-    // Cliente buscaPorCpfComTelefoneNaoNulo(String cpf);
+    @Query("select c from Cliente c where c.cpf = :cpf and c.telefone is not null")
+    Optional<Cliente> buscaPorCpfComTelefoneNaoNulo(String cpf);
 
     //SQL - o Spring não valida em tempo de startup
-    //@Query(nativeQuery = true, value = "select * from tb_cliente cli where cli.cpf=:cpf and cli.telefone is not null")
-    //Cliente buscaPorCpfComTelefoneNaoNuloSql(String cpf);
+    @Query(nativeQuery = true, value = "select * from tb_cliente cli where cli.cpf=:cpf and cli.telefone is not null")
+    Cliente buscaPorCpfComTelefoneNaoNuloSql(String cpf);
 
 }

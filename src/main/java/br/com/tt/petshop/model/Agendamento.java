@@ -8,22 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
-//@Entity
-//@Table(name = "tb_agendamento")
+@Entity // ENTIDADE
+@Table(name = "tb_agendamento")
 public class Agendamento {
-    //@Id
-   // @Column(name = "id")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
 
-   // @Column(name = "dataHoraInicio")
+   @Column(name = "dataHoraInicio")
    public LocalDateTime dataHoraInicio;
 
-  //  @Column(name = "dataHoraFim")
-  public LocalDateTime dataHoraFim;
+   @Column(name = "dataHoraFim")
+   public LocalDateTime dataHoraFim;
 
-  //  @Column(name = "observacao")
-  public String observacoes;
+   @Column(name = "observacao")
+   public String observacoes;
 
     public Agendamento(long id, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String observacoes) {
         this.id = id;
