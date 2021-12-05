@@ -2,7 +2,6 @@ package br.com.tt.petshop.service;
 
 import br.com.tt.petshop.dto.ClienteDetalhes;
 import br.com.tt.petshop.dto.ClienteListagem;
-import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.repository.ClienteRepository;
 import mock.ClienteMock;
 import org.junit.jupiter.api.Assertions;
@@ -34,7 +33,7 @@ public class ClienteServiceTest {
                 .thenReturn(List.of(ClienteMock.theo()));
 
         //Ação - Act
-        List<ClienteListagem> dtos = clienteService.listarClientes();
+        List<ClienteListagem> dtos = clienteService.listarClientes("Theo");
 
         Assertions.assertEquals(1,dtos.size());
         ClienteListagem clientedto = dtos.get(0);

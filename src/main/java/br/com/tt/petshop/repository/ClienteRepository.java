@@ -4,6 +4,7 @@ import br.com.tt.petshop.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,4 +22,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query(nativeQuery = true, value = "select * from tb_cliente cli where cli.cpf=:cpf and cli.telefone is not null")
     Cliente buscaPorCpfComTelefoneNaoNuloSql(String cpf);
 
+    List<Cliente> findByNomeContaining(String nome);
 }

@@ -1,5 +1,7 @@
 package br.com.tt.petshop.service;
 
+import br.com.tt.petshop.dto.ClienteAtualizacao;
+import br.com.tt.petshop.dto.ClienteCriacao;
 import br.com.tt.petshop.dto.ClienteDetalhes;
 import br.com.tt.petshop.dto.ClienteListagem;
 import br.com.tt.petshop.factory.ClienteFactory;
@@ -8,7 +10,6 @@ import br.com.tt.petshop.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,12 +20,17 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public List<ClienteListagem> listarClientes(){
-        return clienteRepository.findAll().stream()
+    public List<ClienteListagem> listarClientes(String nome){
+        List<Cliente> clientes;
+        if (nome == null){
+            clientes = clienteRepository.findAll();
+        }else{
+            clientes = clienteRepository.findByNomeContaining(nome);
+        }
+        return clientes.stream()
                 .map(ClienteFactory::criarClienteListagem)
                 .collect(Collectors.toList());
     }
-
 
     public ClienteDetalhes buscarPorId(Long id){
         /*
@@ -48,4 +54,19 @@ public class ClienteService {
                 .orElseThrow(()-> new RuntimeException("O cliente informado não existe!"));
     }
 
+    public void criar(ClienteCriacao dto) {
+        Cliente cliente = ClienteFactory.criarCliente(dto);
+        clienteRepository.save(cliente);
+    }
+
+    /*
+    public void atualizar(Long id, ClienteAtualizacao dto) {
+        Cliente cliente = ClienteFactory.criarCliente(dto);
+        clienteRepository.save(cliente);
+    }
+    */
+
+    public void apagar(Long id) {
+        clienteRepository.deleteById(id);
+    }
 }
