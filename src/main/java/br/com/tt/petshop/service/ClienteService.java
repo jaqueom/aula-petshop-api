@@ -9,6 +9,7 @@ import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,9 +55,10 @@ public class ClienteService {
                 .orElseThrow(()-> new RuntimeException("O cliente informado não existe!"));
     }
 
-    public void criar(ClienteCriacao dto) {
+    public Long criar(ClienteCriacao dto) {
         Cliente cliente = ClienteFactory.criarCliente(dto);
         clienteRepository.save(cliente);
+        return cliente.getId();
     }
 
     /*
@@ -68,5 +70,20 @@ public class ClienteService {
 
     public void apagar(Long id) {
         clienteRepository.deleteById(id);
+    }
+
+    public void atualizar(Long id, ClienteAtualizacao cliente) {
+
+        Cliente clienteASerAtualizado = clienteRepository.findById(id).orElseThrow();
+
+        //TODO USAR LOMBOK
+        Cliente clienteAtualizado = new Cliente(id
+                , cliente.getNome()
+                , cliente.getNascimento()
+                , cliente.getTelefone()
+                , clienteASerAtualizado.getCpf());
+
+        clienteRepository.save(clienteAtualizado);
+
     }
 }

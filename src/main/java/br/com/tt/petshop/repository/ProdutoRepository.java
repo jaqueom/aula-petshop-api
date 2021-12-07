@@ -12,6 +12,7 @@ public interface ProdutoRepository extends JpaRepository <Produto, Long> {
 
     List<Produto> findByNomeContaining (String nome);
     List<Produto> findByValorBetween(BigDecimal valor1, BigDecimal valor2);
+    List<Produto> findByAtivoTrue();
     List<Produto> findByAtivoFalse();
 
     //Usando JPQL

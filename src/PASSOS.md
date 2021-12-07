@@ -57,3 +57,7 @@ Exercício: AgendamentoService.buscarPorId e AgendamentoService.listar:
 - Criar métodos no service e testes conforme praticado no Produto e Cliente
 
 Exercício: Implementar rotas REST de listagem, criação e deleção para o produto.
+
+
+
+// status code: https://httpstatuses.com/

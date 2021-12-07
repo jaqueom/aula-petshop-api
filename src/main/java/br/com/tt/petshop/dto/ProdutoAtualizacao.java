@@ -4,34 +4,29 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.beans.ConstructorProperties;
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
-public class ClienteAtualizacao {
+public class ProdutoAtualizacao {
 
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name="nome")
     private String nome;
-
-    @Column(name="nascimento")
-    private LocalDate nascimento;
-
-    @Column(name="telefone")
-    private String telefone;
-
+    @Column(name="valor")
+    private BigDecimal valor;
+    @Column(name="ativo")
+    private boolean ativo;
 
     // O JPA/Hibernate usa esse construtor!!
-    ClienteAtualizacao() {}
+    ProdutoAtualizacao() {}
 
-    public ClienteAtualizacao(Long id, String nome, LocalDate nascimento, String telefone) {
+    public ProdutoAtualizacao(Long id, String nome, BigDecimal valor, boolean ativo) {
         this.id = id;
         this.nome = nome;
-        this.nascimento = nascimento;
-        this.telefone = telefone;
+        this.valor = valor;
+        this.ativo = ativo;
     }
 
     public Long getId() {
@@ -42,12 +37,11 @@ public class ClienteAtualizacao {
         return nome;
     }
 
-    public LocalDate getNascimento() {
-        return nascimento;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public boolean isAtivo() {
+        return ativo;
     }
-
 }
