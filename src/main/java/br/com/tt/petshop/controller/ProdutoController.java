@@ -37,8 +37,18 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<ProdutoListagem> listarProdutos(@RequestParam(required = false) String nome){
+    public List<ProdutoDetalhes> listarProdutos(@RequestParam(required = false) String nome){
         return produtoService.listarProdutos(nome);
+    }
+
+    @GetMapping("/{status}")
+    public List<ProdutoDetalhes> consultarProdutosPorStatus(@PathVariable String status){
+        return produtoService.buscarPorStatus(status);
+    }
+
+    @GetMapping("/{id}")
+    public ProdutoDetalhes buscarPorId(@PathVariable("id") Long id){
+        return produtoService.buscaPorId(id);
     }
 
     //create
@@ -50,11 +60,6 @@ public class ProdutoController {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping("/{id}")
-    public ProdutoDetalhes buscarPorId(@PathVariable("id") Long id){
-        return produtoService.buscaPorId(id);
-    }
-
     //Update total
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)//204 - retorno sem body
@@ -63,16 +68,9 @@ public class ProdutoController {
         produtoService.atualizar(id,produto);
     }
 
-    //Delete
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable("id") Long id){
         produtoService.apagar(id);
-    }
-
-    //consultarAtivos
-    @GetMapping("/{status}")
-    public void consultarProdutosPorStatus(@PathVariable("status") String status){
-        produtoService.buscarPorStatus(status);
     }
 
 }

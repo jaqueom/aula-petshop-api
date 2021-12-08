@@ -24,7 +24,7 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
-    public List<ProdutoListagem> listarProdutos (String nome){
+    public List<ProdutoDetalhes> listarProdutos (String nome){
 
         List<Produto> produtos;
         if (nome == null){
@@ -33,7 +33,7 @@ public class ProdutoService {
             produtos = produtoRepository.findByNomeContaining(nome);
         }
         return produtos.stream()
-                .map(ProdutoFactory::criarProdutoListagem)
+                .map(ProdutoFactory::criarProdutoDetalhes)
                 .collect(Collectors.toList());
 
     }
@@ -65,11 +65,17 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    public void buscarPorStatus(String status) {
+    public List<ProdutoDetalhes> buscarPorStatus(String status) {
+
+        List<Produto> produtos;
         if (status.equals("ativos")){
-            produtoRepository.findByAtivoTrue();
-        }else {
-            produtoRepository.findByAtivoFalse();
+            produtos = produtoRepository.findByAtivoTrue();
+        }else{
+            produtos = produtoRepository.findByAtivoFalse();
         }
+        return produtos.stream()
+                .map(ProdutoFactory::criarProdutoDetalhes)
+                .collect(Collectors.toList());
+
     }
 }

@@ -39,10 +39,10 @@ public class ProdutoServiceTest {
                         , ProdutoMock.racaoPorcos()));
 
         //Ação - Act
-        List<ProdutoListagem> dtos = produtoService.listarProdutos(null);
+        List<ProdutoDetalhes> dtos = produtoService.listarProdutos(null);
 
         Assertions.assertEquals(3,dtos.size());
-        ProdutoListagem produto = dtos.get(0);
+        ProdutoDetalhes produto = dtos.get(0);
         Assertions.assertEquals("Ração para cachorros",produto.getNome());
 
     }
