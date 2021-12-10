@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,7 +126,10 @@ class ClienteControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNoContent())
                 .andDo(MockMvcResultHandlers.print());
 
-       // Não deu certo isso: Mockito.verify(clienteService).atualizar(1L, Mockito.any(ClienteAtualizacao.class));
+        // Não deu certo isso:
+        //ArgumentCaptor<ClienteAtualizacao> captor = ArgumentCaptor.forClass(ClienteAtualizacao.class); // cria um objeto de captura
+        //Mockito.verify(clienteService).atualizar(1L, captor.capture());
+
     }
 
     @Test

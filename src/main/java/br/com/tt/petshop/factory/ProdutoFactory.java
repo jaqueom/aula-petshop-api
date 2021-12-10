@@ -1,10 +1,8 @@
 package br.com.tt.petshop.factory;
 
-import br.com.tt.petshop.dto.ClienteCriacao;
 import br.com.tt.petshop.dto.ProdutoCriacao;
 import br.com.tt.petshop.dto.ProdutoDetalhes;
 import br.com.tt.petshop.dto.ProdutoListagem;
-import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.model.Produto;
 
 public class ProdutoFactory {
@@ -23,4 +21,5 @@ public class ProdutoFactory {
                 , dto.getValor()
                 , dto.isAtivo());
     }
+
 }

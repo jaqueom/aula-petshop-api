@@ -1,15 +1,12 @@
 package br.com.tt.petshop.controller;
 
-import br.com.tt.petshop.dto.ClienteAtualizacao;
-import br.com.tt.petshop.dto.ClienteCriacao;
-import br.com.tt.petshop.dto.ClienteDetalhes;
-import br.com.tt.petshop.dto.ClienteListagem;
 import br.com.tt.petshop.dto.ProdutoAtualizacao;
 import br.com.tt.petshop.dto.ProdutoCriacao;
 import br.com.tt.petshop.dto.ProdutoDetalhes;
-import br.com.tt.petshop.dto.ProdutoListagem;
-import br.com.tt.petshop.service.ClienteService;
 import br.com.tt.petshop.service.ProdutoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,6 +25,7 @@ import java.util.List;
 
 @RestController//(@Controlle + @ResponseBody)
 @RequestMapping("/produtos")
+@Tag(name="Produtos")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
@@ -36,24 +34,30 @@ public class ProdutoController {
         this.produtoService = produtoService;
     }
 
+    /*
     @GetMapping
     public List<ProdutoDetalhes> listarProdutos(@RequestParam(required = false) String nome){
         return produtoService.listarProdutos(nome);
     }
 
-    @GetMapping("/{status}")
-    public List<ProdutoDetalhes> consultarProdutosPorStatus(@PathVariable String status){
-        return produtoService.buscarPorStatus(status);
+     */
+
+    @GetMapping
+    @Operation(description="Consulta produtos por status: ativos ou inativos ou TODOS")
+    public List<ProdutoDetalhes> consultarProdutos(//@RequestParam(required = false) String nome,
+                                                   @RequestParam(required = false) Status status){
+        return produtoService.buscarProdutosPorStatus(status);
     }
 
+
     @GetMapping("/{id}")
-    public ProdutoDetalhes buscarPorId(@PathVariable("id") Long id){
+    public ProdutoDetalhes buscarPorId(
+            @PathVariable @Parameter(description = "Representa o ID do Produto") Long id){
         return produtoService.buscaPorId(id);
     }
 
     //create
     @PostMapping
-    //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity criarProduto(@RequestBody ProdutoCriacao produto){
         Long idProduto = produtoService.criar(produto);
         URI location = URI.create("/produtos/"+idProduto);

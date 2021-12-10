@@ -1,14 +1,11 @@
 package br.com.tt.petshop.service;
 
-import br.com.tt.petshop.dto.ClienteCriacao;
+import br.com.tt.petshop.controller.Status;
 import br.com.tt.petshop.dto.ProdutoAtualizacao;
 import br.com.tt.petshop.dto.ProdutoCriacao;
 import br.com.tt.petshop.dto.ProdutoDetalhes;
-import br.com.tt.petshop.dto.ProdutoListagem;
-import br.com.tt.petshop.exception.ItemNaoEncontradoException;
-import br.com.tt.petshop.factory.ClienteFactory;
+import br.com.tt.petshop.exception.NaoExisteException;
 import br.com.tt.petshop.factory.ProdutoFactory;
-import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.model.Produto;
 import br.com.tt.petshop.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
@@ -41,13 +38,13 @@ public class ProdutoService {
     public ProdutoDetalhes buscaPorId(Long id){
         return produtoRepository.findById(id)
                 .map(ProdutoFactory::criarProdutoDetalhes)
-                .orElseThrow(()-> new ItemNaoEncontradoException("O produto informado não existe!"));
+                .orElseThrow(()-> new NaoExisteException("O produto informado não existe!"));
     }
 
     public Long criar(ProdutoCriacao dto) {
         Produto produto = ProdutoFactory.criarProduto(dto);
-        produtoRepository.save(produto);
-        return produto.getId();
+        Produto produtoSalvo = produtoRepository.save(produto);
+        return produtoSalvo.getId();
     }
 
     public void atualizar(Long id, ProdutoAtualizacao produto) {
@@ -65,17 +62,22 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    public List<ProdutoDetalhes> buscarPorStatus(String status) {
+
+    public List<ProdutoDetalhes> buscarProdutosPorStatus(Status status) {
 
         List<Produto> produtos;
-        if (status.equals("ativos")){
+
+        if (status.equals(Status.ATIVO)) {
             produtos = produtoRepository.findByAtivoTrue();
-        }else{
+        }else if (status.equals(Status.INATIVO)){
             produtos = produtoRepository.findByAtivoFalse();
+        }else{
+            produtos = produtoRepository.findAll();
         }
         return produtos.stream()
                 .map(ProdutoFactory::criarProdutoDetalhes)
                 .collect(Collectors.toList());
 
     }
+
 }

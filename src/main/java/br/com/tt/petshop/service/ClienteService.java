@@ -4,6 +4,7 @@ import br.com.tt.petshop.dto.ClienteAtualizacao;
 import br.com.tt.petshop.dto.ClienteCriacao;
 import br.com.tt.petshop.dto.ClienteDetalhes;
 import br.com.tt.petshop.dto.ClienteListagem;
+import br.com.tt.petshop.exception.NaoExisteException;
 import br.com.tt.petshop.factory.ClienteFactory;
 import br.com.tt.petshop.model.Cliente;
 import br.com.tt.petshop.repository.ClienteRepository;
@@ -52,7 +53,7 @@ public class ClienteService {
         //VERSÃO RESUMIDA (faz a mesma coisa que ali em cima)
         return clienteRepository.findById(id)
                 .map(ClienteFactory::criarClienteDetalhes)
-                .orElseThrow(()-> new RuntimeException("O cliente informado não existe!"));
+                .orElseThrow(()-> new NaoExisteException("O cliente informado não existe!"));
     }
 
     public Long criar(ClienteCriacao dto) {

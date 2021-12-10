@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 
 public class ProdutoDetalhes {
 
-    private Long id;
-    private String nome;
-    private BigDecimal valor;
-    private boolean ativo;
+    private final Long id;
+    private final String nome;
+    private final BigDecimal valor;
+    private final boolean ativo;
 
     public ProdutoDetalhes(Long id, String nome, BigDecimal valor, boolean ativo) {
         this.id = id;

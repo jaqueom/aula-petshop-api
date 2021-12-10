@@ -61,3 +61,8 @@ Exercício: Implementar rotas REST de listagem, criação e deleção para o pro
 
 
 // status code: https://httpstatuses.com/
+
+
+EXERCÍCIOS PARA 13/12:
+- Validações com beans annotation https://www.journaldev.com/21577/spring-bean-annotation#:~:text=Spring%20%40Bean%20Annotation%20is%20applied,class%20by%20calling%20them%20directly.
+- ver no git do gilberto

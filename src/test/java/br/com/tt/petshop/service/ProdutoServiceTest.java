@@ -4,6 +4,7 @@ package br.com.tt.petshop.service;
 import br.com.tt.petshop.dto.ClienteListagem;
 import br.com.tt.petshop.dto.ProdutoDetalhes;
 import br.com.tt.petshop.dto.ProdutoListagem;
+import br.com.tt.petshop.model.Produto;
 import br.com.tt.petshop.repository.ClienteRepository;
 import br.com.tt.petshop.repository.ProdutoRepository;
 import mock.ClienteMock;
