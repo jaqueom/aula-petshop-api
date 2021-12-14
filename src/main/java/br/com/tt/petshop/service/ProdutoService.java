@@ -21,6 +21,19 @@ public class ProdutoService {
         this.produtoRepository = produtoRepository;
     }
 
+    public List<ProdutoDetalhes> listarTodosProdutos (){
+
+        List<Produto> produtos;
+
+        produtos = produtoRepository.findAll();
+
+        return produtos.stream()
+                .map(ProdutoFactory::criarProdutoDetalhes)
+                .collect(Collectors.toList());
+
+    }
+
+
     public List<ProdutoDetalhes> listarProdutos (String nome){
 
         List<Produto> produtos;

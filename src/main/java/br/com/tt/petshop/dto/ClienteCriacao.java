@@ -1,11 +1,16 @@
 package br.com.tt.petshop.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Getter
+@AllArgsConstructor
 public class ClienteCriacao {
     @Id
     @Column(name="id")
@@ -27,29 +32,4 @@ public class ClienteCriacao {
     // O JPA/Hibernate usa esse construtor!!
     ClienteCriacao() {}
 
-    public ClienteCriacao(Long id, String nome, LocalDate nascimento, String telefone, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.nascimento = nascimento;
-        this.telefone = telefone;
-        this.cpf = cpf;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public LocalDate getNascimento() {
-        return nascimento;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getCpf() {return cpf;}
 }

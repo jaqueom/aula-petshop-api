@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController//(@Controlle + @ResponseBody)
 @RequestMapping("/produtos")
 @Tag(name="Produtos")
+@CrossOrigin(origins = "*")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
@@ -34,15 +36,13 @@ public class ProdutoController {
         this.produtoService = produtoService;
     }
 
-    /*
+
     @GetMapping
-    public List<ProdutoDetalhes> listarProdutos(@RequestParam(required = false) String nome){
-        return produtoService.listarProdutos(nome);
+    public List<ProdutoDetalhes> listar(){
+        return produtoService.listarTodosProdutos();
     }
 
-     */
-
-    @GetMapping
+    @GetMapping("/status")
     @Operation(description="Consulta produtos por status: ativos ou inativos ou TODOS")
     public List<ProdutoDetalhes> consultarProdutos(//@RequestParam(required = false) String nome,
                                                    @RequestParam(required = false) Status status){

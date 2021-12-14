@@ -1,11 +1,16 @@
 package br.com.tt.petshop.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
+@Getter
+@AllArgsConstructor
 public class ProdutoAtualizacao {
 
     @Id
@@ -22,26 +27,4 @@ public class ProdutoAtualizacao {
     // O JPA/Hibernate usa esse construtor!!
     ProdutoAtualizacao() {}
 
-    public ProdutoAtualizacao(Long id, String nome, BigDecimal valor, boolean ativo) {
-        this.id = id;
-        this.nome = nome;
-        this.valor = valor;
-        this.ativo = ativo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
 }
