@@ -1,1 +1,4 @@
 client.credito.url: https://imersao-credito-api.herokuapp.com
+
+spring.datasource:
+  url: ${DATABASE_URL}
