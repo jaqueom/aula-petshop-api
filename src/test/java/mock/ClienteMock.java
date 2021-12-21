@@ -1,6 +1,6 @@
 package mock;
 
-import br.com.tt.petshop.model.Cliente;
+import br.com.tt.petshop.infra.model.Cliente;
 
 import java.time.LocalDate;
 

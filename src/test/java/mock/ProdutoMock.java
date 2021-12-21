@@ -1,10 +1,8 @@
 package mock;
 
-import br.com.tt.petshop.model.Cliente;
-import br.com.tt.petshop.model.Produto;
+import br.com.tt.petshop.infra.model.Produto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class ProdutoMock {
 
